@@ -18,6 +18,7 @@ function updateWeather(response) {
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}"
                 class="vanilla-weather-app-icon"
               />`;
+  getWeatherForecast(response.data.city);
 }
 function formattedDate(date) {
   let hours = date.getHours();
@@ -45,7 +46,7 @@ function formattedDate(date) {
 
 function searchCity(city) {
   let apiKey = "b2a5adcct04b33178913oc335f405433";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&unit=metric`;
   axios.get(apiUrl).then(updateWeather);
 }
 function search(event) {
@@ -54,7 +55,14 @@ function search(event) {
 
   searchCity(searchInputElement.value);
 }
-function showForecast() {
+function getWeatherForecast(city) {
+  let apiKey = "b2a5adcct04b33178913oc335f405433";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(showForecast);
+}
+
+function showForecast(response) {
+  console.log(response.data);
   let days = ["Tues", "Wed", "Thurs", "Fri", "Sat"];
   let forecastHtml = "";
 
@@ -78,4 +86,3 @@ let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", search);
 
 searchCity("Kabul");
-showForecast();

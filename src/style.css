@@ -103,8 +103,10 @@ header {
   display: flex;
   justify-content: center;
 }
+.weather-temperature-max {
+  padding: 0 15px;
+}
 .weather-temperature-min {
-  padding: 0 18px;
   opacity: 0.5;
 }
 footer {
