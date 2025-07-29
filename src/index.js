@@ -70,8 +70,6 @@ function getWeatherForecast(city) {
 }
 
 function showForecast(response) {
-  console.log(response.data);
-
   let forecastHtml = "";
 
   response.data.daily.forEach(function (day, index) {
